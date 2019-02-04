@@ -14,3 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/w/', function () {
+    return "Bokić";
+});
+
+Route::get('/pozdrav/{ime}', function ($ime) {
+    return "Dobro došao/la ".$ime;
+});
+
+Route::get('/probna/','probniController@probnafunkcija') ;
+
+Route::redirect('/here', '/there');
+
+Route::get('/there', function () {
+    return "Bok i ć";
+});
