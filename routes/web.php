@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::resource('predmets','PredmetController');
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,3 +31,4 @@ Route::redirect('/here', '/there');
 Route::get('/there', function () {
     return "Bok i ć";
 });
+
