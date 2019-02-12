@@ -7,4 +7,5 @@
 -kreirati view za predmet
 - kreirati CRUD za predmet
 -ostaviti relaciju dvorana-rezervacija-predmet
+- heroku
 
