@@ -32,3 +32,7 @@ Route::get('/there', function () {
     return "Bok i ć";
 });
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
