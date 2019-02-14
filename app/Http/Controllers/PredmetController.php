@@ -5,16 +5,15 @@ namespace App\Http\Controllers;
 use App\Predmet;
 use Illuminate\Http\Request;
 
-class PredmetController extends Controller
-{
+class PredmetController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $predmets=Predmet::all();
+    public function index() {
+        $predmets = Predmet::all();
         //dd($predmets);
 //        echo '<ul>';
 //        foreach ($predmets as $key => $p) {
@@ -24,14 +23,19 @@ class PredmetController extends Controller
         return view('predmet.index', compact('predmets'));
     }
 
+    public function top10() {
+        $predmets = Predmet::orderBy('upisanostud', 'desc')->take(10)->get();
+        return view('childprimjer', compact('predmets'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('predmet.create');
+     
     }
 
     /**
@@ -40,8 +44,7 @@ class PredmetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -51,9 +54,12 @@ class PredmetController extends Controller
      * @param  \App\Predmet  $predmet
      * @return \Illuminate\Http\Response
      */
-    public function show(Predmet $predmet)
-    {
-        //
+    public function show(Predmet $predmet) {
+       
+        // $predmet=\App\Predmer::find($id)
+    
+        return view('predmet.show', ['predmet'=>$predmet]);
+    
     }
 
     /**
@@ -62,8 +68,7 @@ class PredmetController extends Controller
      * @param  \App\Predmet  $predmet
      * @return \Illuminate\Http\Response
      */
-    public function edit(Predmet $predmet)
-    {
+    public function edit(Predmet $predmet) {
         //
     }
 
@@ -74,8 +79,7 @@ class PredmetController extends Controller
      * @param  \App\Predmet  $predmet
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Predmet $predmet)
-    {
+    public function update(Request $request, Predmet $predmet) {
         //
     }
 
@@ -85,8 +89,8 @@ class PredmetController extends Controller
      * @param  \App\Predmet  $predmet
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Predmet $predmet)
-    {
+    public function destroy(Predmet $predmet) {
         //
     }
+
 }
