@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Predmet;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use function view;
 
 class PredmetController extends Controller {
 
@@ -44,7 +47,33 @@ class PredmetController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        //
+        // dd($request);
+        $validator = Validator::make($request->all(), [
+                    "kratpred" => 'string|max:8',
+                    "nazpred" => 'required|string|max:60',
+                    "siforgjed" => 'numeric|between:100000,100020',
+                    "upisanostud" => 'numeric|digits_between:0,2',
+                    "brojsatitjedno" => 'numeric|between:1,10'
+        ]);
+        if ($validator->fails()) {
+            Session::flash('error', 'Greška!');  // $_SESSION['error']='Greška!'
+            return redirect('predmets/create')
+                            ->withErrors($validator)
+                            ->withInput();
+        } else {
+            // store
+            $p = new Predmet();
+            $p->kratpred = $request->input('kratpred');
+            $p->nazpred = $request->input('nazpred');
+            $p->siforgjed = $request->input('siforgjed');
+            $p->upisanostud = $request->input('upisanostud');
+            $p->brojsatitjedno = $request->input('brojsatitjedno');
+            $p->save();
+            // redirect
+            Session::flash('message', 'Uspješno dodan predmet!');
+            //return Redirect::to('mobitels');
+            return redirect()->route('predmets.index');
+        }
     }
 
     /**
@@ -78,7 +107,33 @@ class PredmetController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Predmet $predmet) {
-        //
+
+        $validator = Validator::make($request->all(), [
+                    "kratpred" => 'string|max:8',
+                    "nazpred" => 'required|string|max:60',
+                    "siforgjed" => 'numeric|between:100000,100020',
+                    "upisanostud" => 'numeric|digits_between:0,2',
+                    "brojsatitjedno" => 'numeric|between:1,10'
+        ]);
+        if ($validator->fails()) {
+            Session::flash('error', 'Greška!');  // $_SESSION['error']='Greška!'
+            return redirect('predmets/create')
+                            ->withErrors($validator)
+                            ->withInput();
+        } else {
+            // store
+
+            $predmet->kratpred = $request->input('kratpred');
+            $predmet->nazpred = $request->input('nazpred');
+            $predmet->siforgjed = $request->input('siforgjed');
+            $predmet->upisanostud = $request->input('upisanostud');
+            $predmet->brojsatitjedno = $request->input('brojsatitjedno');
+            $predmet->save();
+            // redirect
+            Session::flash('message', 'Uspješno izmjenjen predmet!');
+            //return Redirect::to('mobitels');
+            return redirect()->route('predmets.index');
+        }
     }
 
     /**
@@ -88,7 +143,9 @@ class PredmetController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(Predmet $predmet) {
-        //
+     $predmet->delete();
+    Session::flash('message', 'Predmet obrisan!');
+    return redirect()->route('predmets.index');
     }
 
 }
