@@ -128,6 +128,13 @@ return [
             'label'       => 182,
             'label_color' => 'success',
         ],
+          [
+            'text'        => 'New predmet',
+            'url'         => '/predmets/create',
+            'icon'        => 'plus',
+            'label'       => 'new',
+            'label_color' => 'success',
+        ],
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',

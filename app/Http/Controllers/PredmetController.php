@@ -35,7 +35,6 @@ class PredmetController extends Controller {
      */
     public function create() {
         return view('predmet.create');
-     
     }
 
     /**
@@ -55,11 +54,10 @@ class PredmetController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(Predmet $predmet) {
-       
+
         // $predmet=\App\Predmer::find($id)
-    
-        return view('predmet.show', ['predmet'=>$predmet]);
-    
+
+        return view('predmet.show', ['predmet' => $predmet]);
     }
 
     /**
@@ -69,7 +67,7 @@ class PredmetController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(Predmet $predmet) {
-        //
+        return view('predmet.edit', ['predmet' => $predmet]);
     }
 
     /**
